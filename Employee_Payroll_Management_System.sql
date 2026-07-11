@@ -29,8 +29,8 @@ INSERT INTO Employees
 VALUE
 ("EMP001", "Aarav Sharma", "Male", "Development", "Mumbai", 85000.00, 17000.00, 8500.00, 5000, 12.50, "Senior Backend Developer specializing in Python.", "1990-05-15", "2018-03-10", "09:15:00", "SQL,Python", TRUE);
 
-select * from employees;
-
+select * from employees;*/
+/*
 INSERT INTO Employees 
 (EmployeeCode, FullName, Gender, Department, City, Salary, HRA, DA, Bonus, TaxRate, Bio, DateOfBirth, JoiningDate, LoginTime, Skills, IsActive)
 VALUES
@@ -59,8 +59,11 @@ VALUES
 ("EMP024", "Devansh Bhatia", "Male", "Sales", "Mumbai", 63000.00, 12600.00, 6300.00, 14000, 10.00, "B2B sales executive.", "1994-11-05", "2021-11-11", "09:15:00", "Excel,Tableau", TRUE),
 ("EMP025", "Kiara Advani", "Female", "Research", "Bengaluru", 102000.00, 20400.00, 10200.00, 6500, 15.00, "Machine learning engineer.", "1993-06-12", "2021-01-15", "09:45:00", "SQL,Python,R", FALSE);
 
-SELECT *FROM employees;
 
+
+
+SELECT *FROM employees;
+/*
 SELECT * from employees 
 where Gender = "Male";
 
@@ -80,6 +83,53 @@ ORDER BY Salary;
 SELECT FullName, Department, Salary 
 FROM Employees
 ORDER BY Salary DESC;
-*/
+
 
 SELECT * FROM employees;
+
+SELECT EmployeeID,FullName,Salary,HRA,DA,Bonus,TaxRate,
+(Salary+HRA+DA+Bonus) AS GrossSalary,
+((Salary+HRA+DA+Bonus)*TaxRate/100) AS TaxAmount,
+((Salary+HRA+DA+Bonus)-((Salary+HRA+DA+Bonus)*TaxRate/100)) AS NetSalary
+FROM Employees;
+
+SELECT * FROM employees;
+
+UPDATE employees 
+SET Salary =  100000
+WHERE EmployeeCode = "EMP003";
+
+SELECT * FROM employees;
+
+UPDATE Employees
+SET Salary=Salary+5000
+WHERE Department="Sales";
+
+SELECT * FROM employees;
+
+UPDATE Employees
+SET Bonus=Bonus+1000
+WHERE Department="Support";
+
+SELECT * FROM employees;
+
+UPDATE Employees
+SET IsActive=1
+WHERE EmployeeID=10;
+
+SELECT * FROM Employees;
+
+SELECT * FROM Employees
+WHERE Salary BETWEEN 70000 AND 80000;
+
+SELECT * FROM Employees
+WHERE FullName LIKE 'A%';
+
+SELECT * FROM Employees
+WHERE City IN ('Mumbai','Pune');
+*/
+SELECT EmployeeID,FullName,
+(Salary+HRA+DA+Bonus)-((Salary+HRA+DA+Bonus)*TaxRate/100) AS NetSalary
+FROM Employees
+ORDER BY NetSalary DESC
+LIMIT 5;
