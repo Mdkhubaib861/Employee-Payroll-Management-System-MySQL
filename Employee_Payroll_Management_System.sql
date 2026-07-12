@@ -127,9 +127,45 @@ WHERE FullName LIKE 'A%';
 
 SELECT * FROM Employees
 WHERE City IN ('Mumbai','Pune');
-*/
+
 SELECT EmployeeID,FullName,
 (Salary+HRA+DA+Bonus)-((Salary+HRA+DA+Bonus)*TaxRate/100) AS NetSalary
 FROM Employees
 ORDER BY NetSalary DESC
 LIMIT 5;
+
+SELECT * FROM employees;
+
+ALTER TABLE Employees
+ADD COLUMN Country VARCHAR(20) DEFAULT "India";
+
+SELECT * FROM employees;
+
+ALTER TABLE Employees
+ADD COLUMN Experience INT (2) DEFAULT 1
+AFTER Bio;
+
+ALTER TABLE Employees
+ADD COLUMN Gross_Salary DECIMAL(10,2)
+GENERATED ALWAYS AS (Salary + HRA + DA + Bonus) STORED
+AFTER TaxRate;
+
+SELECT * FROM employees;
+
+ALTER TABLE Employees
+ADD COLUMN Net_Salary DECIMAL(10,2)
+GENERATED ALWAYS AS(Gross_Salary-Gross_Salary*TaxRate/100) STORED
+AFTER Gross_Salary;
+SELECT * FROM employees;
+
+
+ALTER TABLE Employees
+RENAME COLUMN Net_Salary TO CTC;
+
+ALTER TABLE Employees
+ADD COLUMN Promotion BOOLEAN
+GENERATED ALWAYS AS (
+IF (CTC*12>=800000, TRUE, FALSE)
+) STORED
+AFTER Experience;	
+*/
